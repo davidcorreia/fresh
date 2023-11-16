@@ -17,7 +17,7 @@ RUN docker-php-ext-configure zip \
   && docker-php-ext-install pdo_mysql
 
 
-COPY ./app .
+#COPY ./app .
 
 #RUN composer install
 
