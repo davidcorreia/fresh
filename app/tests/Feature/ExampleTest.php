@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\ProcessPodcast;
+use Illuminate\Support\Facades\Queue;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -10,10 +12,14 @@ class ExampleTest extends TestCase
     /**
      * A basic test example.
      */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_job(): void
     {
-        $response = $this->get('/');
+        Queue::fake();
 
-        $response->assertStatus(200);
+        ProcessPodcast::dispatch()->onQueue('someQueue');//->onConnection('redis');
+
+        Queue::assertPushedOn('someQueue', ProcessPodcast::class, function ($job) {
+            return true;
+        });
     }
 }

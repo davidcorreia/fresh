@@ -9,7 +9,7 @@ services:
     - ./app:/var/www/html
 
   redis:
-    image: mysql/mysql-server:8.0.28
+    image: redis:5.0-alpine
 
   db:
     image: mysql/mysql-server:8.0.28
