@@ -14,6 +14,10 @@ class ExampleTest extends TestCase
      */
     public function test_job(): void
     {
+        dd(
+            'token: '. \Illuminate\Support\Facades\ParallelTesting::token(),
+            'mysql: '. config('database.connections.mysql.database')
+        );
         Queue::fake();
 
         ProcessPodcast::dispatch()->onQueue('someQueue');//->onConnection('redis');
